@@ -8,7 +8,7 @@
         <div class="flex flex-wrap justify-center">
             <img
                 class="max-w-xs rounded-lg shadow-md"
-                :src="backend + store.img"
+                :src="server + store.img"
             />
         </div>
 
@@ -26,7 +26,7 @@
                 >
                     <img
                         class="object-cover w-full h-60"
-                        :src=" backend + product.img"
+                        :src=" server + product.img"
                     />
                     <label>{{ product.name }}</label>
                 </div>
@@ -49,19 +49,19 @@ export default {
             id: "",
             store: "",
             products: [],
-            backend: process.env.VUE_APP_BACKEND_ADDRESS
+            server: 'http://216.250.9.45:8000'
         };
     },
     mounted() {
         this.id = this.$route.path.split("/")[2];
         axios
-            .get( this.backend + "/mob/stores/" + this.id)
+            .get( "http://216.250.9.45:8000/mob/stores/" + this.id)
             .then((resp) => {
                 this.store = resp.data;
                 this.location = resp.data.location;
             });
         axios
-            .get( this.backend + "/mob/products?store=" + this.id)
+            .get( "http://216.250.9.45:8000/mob/products?store=" + this.id)
             .then((resp) => {
                 this.products = resp.data.data;
             });
