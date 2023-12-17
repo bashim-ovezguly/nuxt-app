@@ -1,10 +1,17 @@
 export default {
+
+  
+ env:{
+  server_ip: 'http://216.250.9.45:8000',
+
+ },
+
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'template-app',
+    title: 'Söwda toplumy - MarketPlace',
     htmlAttrs: {
       lang: 'en',
     },
