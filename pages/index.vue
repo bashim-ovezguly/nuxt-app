@@ -30,12 +30,8 @@
 // @ is an alias to /src
 import axios from "axios";
 
-
 export default {
     name: "HomeView",
-
-   
-    
     data() {
         return {
             items: [],
@@ -43,17 +39,13 @@ export default {
 
         };
     },
-
-   
-
-    created() {
-        axios
-            .get(this.server + "/mob/stores?premium=1")
+    async fetch() {
+        await axios
+            .get(this.server + "/mob/stores")
             .then((resp) => {
             this.items = resp.data.data;
         });
-    },
-   
+  },    
 };
 </script>
 

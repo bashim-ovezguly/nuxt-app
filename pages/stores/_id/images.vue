@@ -37,16 +37,9 @@ export default {
             server: process.env.server_ip,
         };
     },
-
-    head() {
-    return {
-      title: "Suratlar"
-    };
-    },
-
-    created() {
+    async fetch() {
         this.id = this.$route.path.split("/")[2];
-        axios
+        await axios
             .get( this.server+ "/mob/stores/" + this.id)
             .then((resp) => {
             this.images = resp.data.images;
@@ -55,6 +48,12 @@ export default {
         });
         
     },
+    head() {
+    return {
+      title: "Suratlar"
+    };
+    },
+
 };
 
 </script>

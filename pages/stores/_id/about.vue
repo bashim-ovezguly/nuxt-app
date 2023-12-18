@@ -14,17 +14,26 @@ export default {
             description:'',
             id:'',
             items: [],
+            contacts:[],
             server: process.env.server_ip,
+            storeName:'',
         };
     },
-    created() {
+    async fetch() {
         this.id = this.$route.path.split("/")[2];
-        axios
+        await axios
             .get( this.server+ "/mob/stores/" + this.id)
             .then((resp) => {
             this.description = resp.data.body_tm;
+            this.storeName = resp.data.name;
         });
         
+    },
+
+    head() {
+        return {
+        title: this.storeName +" - Dükan barada"
+        };
     },
 };
 

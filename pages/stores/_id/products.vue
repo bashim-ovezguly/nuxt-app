@@ -1,13 +1,11 @@
 <template>
     <div class="products">
-
         <label class="tab-content-name">Harytlar: {{ productsCount }}</label>
                 <div class="flex flex-wrap justify-center">
                     <div 
                         v-for="product in products"
                         :key="product.id"
                         class="grid w-max-content h-80 m-5 shadow-md rounded-lg overflow-hidden border"
-                        
                     >
                         <img
                             class="object-cover w-[230px] h-[230px]"
@@ -18,18 +16,13 @@
                         </div>
                     </div>
                 </div>
-
         <div v-if="loading == true">
             <label>Loading...</label>
         </div>
-       
     </div>
-
-    
 </template>
 
 <script>
-
 import axios from "axios";
 export default {
     name: "HomeView",
@@ -44,23 +37,22 @@ export default {
             products:[],
         };
     },
-    
-    head() {
-    return {
-      title: "Harytlar"
-    };
-    },
 
-    created() {
+    async fetch() {
         this.id = this.$route.path.split("/")[2];
-        axios
+        await axios
             .get(this.server + "/mob/products?store=" + this.id)
             .then((resp) => {
             this.products = resp.data.data;
             this.productsCount = resp.data.data.length
             this.loading = false;
         });
-        
+    },
+
+    head() {
+        return {
+        title: "Harytlar"
+        };
     },
 };
 

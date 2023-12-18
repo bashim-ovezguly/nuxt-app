@@ -31,7 +31,7 @@
         </div>
 
         <div class="tab-content m-[10px]">
-            <RouterView />
+            <RouterView keep-alive />
         </div>
       
     </div>
@@ -51,9 +51,10 @@ export default {
             server: process.env.server_ip,
         };
     },
-    created() {
+
+    async fetch(){
         this.id = this.$route.path.split("/")[2];
-        axios
+        await axios
             .get( this.server+ "/mob/stores/" + this.id)
             .then((resp) => {
             this.store = resp.data;
@@ -65,6 +66,8 @@ export default {
             this.products = resp.data.data;
         });
     },
+
+   
 };
 </script>
 
