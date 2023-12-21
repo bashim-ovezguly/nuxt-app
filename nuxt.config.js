@@ -1,13 +1,11 @@
 export default {
-
-  
- env:{
-  server_ip: 'http://216.250.9.45:8000',
-
- },
+  env: {
+    server_ip: 'http://216.250.9.45:8000',
+  },
 
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
+  srcDir: 'src/',
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -21,7 +19,7 @@ export default {
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: 'logo.png' }],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
