@@ -15,8 +15,11 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
     "core-js": "^3.25.3",
+    "lucide": "^0.299.0",
+    "lucide-vue": "^0.299.0",
     "nuxt": "^2.15.8",
     "nuxt-icon": "^0.6.7",
+    "nuxt-lucide-icons": "^1.0.3",
     "tailwindcss": "^3.3.6",
     "vue": "^2.7.10",
     "vue-server-renderer": "^2.7.10",

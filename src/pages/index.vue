@@ -1,6 +1,5 @@
 <template>
   <div class="content">
-    <LoginModal v-if="loginModal == true" parent="{{" this }}> </LoginModal>
     <div v-if="fetchFail == true" class="grid justify-center">
       <h1 class="text-[25px] p-[10px]">Serwer jogap bermedi</h1>
       <Icon name="uil:github" color="black" />
@@ -36,11 +35,9 @@
 <script lang="ts">
 // @ is an alias to /src
 import axios from 'axios'
-import LoginModal from '../components/LoginModal.vue'
 
 export default {
   name: 'HomeView',
-  components: { LoginModal },
 
   data() {
     return {
@@ -60,13 +57,6 @@ export default {
         this.fetchFail = true
       })
   },
-  methods: {
-    closeLoginModal() {
-      this.loginModal = false
-    },
-    openLoginModal() {
-      this.loginModal = true
-    },
-  },
+ 
 }
 </script>

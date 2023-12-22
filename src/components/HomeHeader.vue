@@ -7,6 +7,7 @@
           <label>Söwda toplumy - MarketPlace</label>
         </div>
       </a>
+      <a class="text-white" href="/login">Ulgama gir</a>
     </div>
     <div class="flex flex-wrap justify-center sticky top-[0px]">
       <a
@@ -14,6 +15,7 @@
         href="/"
         >Baş sahypa</a
       >
+
       <a
         class="p-[10px] hover:text-sky-500 transition-all hover:bg-slate-100"
         href="/stores"
@@ -31,6 +33,10 @@
     </div>
   </div>
 </template>
+
+<script setup>
+</script>
+
 
 <style>
 .header {
