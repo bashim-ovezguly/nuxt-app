@@ -5,9 +5,9 @@
         <img class="h-full" src="../static/logo_white.png" />
         <div class="text grid">
           <label>Söwda toplumy - MarketPlace</label>
-        </div>
+        </div>        
       </a>
-      <a class="text-white" href="/login">Ulgama gir</a>
+      <Camera></Camera>
     </div>
     <div class="flex flex-wrap justify-center sticky top-[0px]">
       <a
@@ -15,7 +15,6 @@
         href="/"
         >Baş sahypa</a
       >
-
       <a
         class="p-[10px] hover:text-sky-500 transition-all hover:bg-slate-100"
         href="/stores"
@@ -30,12 +29,22 @@
       <a class="p-[10px] hover:text-sky-500 transition-all hover:bg-slate-100"
         >Awtoulaglar</a
       >
+
+      <Camera></Camera>
     </div>
   </div>
 </template>
 
-<script setup>
+
+<script>
+  import { Camera } from 'lucide-vue';
+  export default {
+    name:"HomeHeader",
+
+    components: { Camera }
+  };
 </script>
+
 
 
 <style>

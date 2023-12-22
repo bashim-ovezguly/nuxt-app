@@ -1,5 +1,5 @@
 <template>
-  <div  class="bgk">
+  <div class="bgk">
     <div class="fields grid w-400px h-max shadow-md rounded-[10px] p-[20px]">
       <label class="text-[30px] text-sky-400 text-bold my-[10px]">Giriş</label>
       <label class="text-[12px] mt-[5px]">Ulanyjy adyňyz</label>

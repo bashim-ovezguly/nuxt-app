@@ -1,4 +1,3 @@
-
 <template>
   <div>
     <HomeHeader></HomeHeader>
@@ -8,9 +7,5 @@
 </template>
 
 <script>
-  export default{
-    
-  }
-
+export default {}
 </script>
-

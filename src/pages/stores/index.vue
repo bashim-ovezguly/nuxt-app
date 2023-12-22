@@ -40,11 +40,15 @@
 import axios from 'axios'
 
 export default {
+  StoreCard:{
+    name:String,
+    location: String,
+  },
   name: 'HomeView',
   data() {
-    return {
+    return { 
       fetchFail: false,
-      items: [],
+      items:[],
       server: process.env.server_ip,
     }
   },

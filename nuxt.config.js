@@ -44,6 +44,10 @@ export default {
     '@nuxtjs/axios',
   ],
 
+  // lucide: {
+  //   namePrefix: 'Icon',
+  // },
+
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
@@ -51,5 +55,26 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    extend(config) {
+      config?.module?.rules?.push?.({
+        test: /\.(?:js|mjs|cjs)$/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              [
+                '@babel/preset-env',
+                {
+                  targets: ['>0.25%', 'not ie 11'],
+                  corejs: '3.25.3',
+                  useBuiltIns: 'entry',
+                },
+              ],
+            ],
+          },
+        },
+      })
+    },
+  },
 }
