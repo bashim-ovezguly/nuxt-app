@@ -7,10 +7,13 @@
         :key="product.id"
         class="grid w-max-content h-80 m-5 shadow-md rounded-lg overflow-hidden border"
       >
-        <img
-          class="object-cover w-[230px] h-[230px]"
-          :src="server + product.img"
-        />
+        <a :href="'/products/' + product.id">
+          <img
+            class="object-cover w-[230px] h-[230px]"
+            :src="server + product.img"
+          />
+        </a>
+
         <div class="p-[10px]">
           <label class="bg-white">{{ product.name }}</label>
         </div>

@@ -8,42 +8,28 @@
       </button>
     </div>
 
-    <MyLoader v-if="isLoading"></MyLoader>
-
     <div v-if="fetchFail == false" class="home">
       <h1 class="text-3xl font-bold p-[10px]">Dükanlar</h1>
       <div class="search flex border rounded max-w-[200px] p-[5px] m-[10px]">
-        <input 
-          id="search-name"
-          
-          placeholder="Ady boýunça gözleg..."
-        /> 
-        <button @click="setData()">
-          <IconSearch 
-            class="text-slate-400 mx-[5px] hover:bg-slate-100 rounded p-[5px] w-[30px] h-[30px]">
-          </IconSearch>
-        </button>
+        <input v-bind="searchName" placeholder="Ady boýunça gözleg..." />
       </div>
     </div>
-
-    
-    <h3 v-if="items.length == 0 && !isLoading">Dükan tapylmady</h3>
-    
     <div class="flex flex-wrap items justify-center">
       <div
         v-for="(item, i) in items"
         :key="i"
         class="item grid shadow-md rounded-lg overflow-hidden border m-[10px] w-[230px]"
       >
-        <a class="w-[230px] h-230px" :href="'stores/' + item.id + '/products'">
+        <a class="w-[230px] h-230px" :href="'cars/' + item.id">
           <img class="w-full object-cover h-60" :src="server + item.img" />
         </a>
 
         <div class="text grid p-[10px]">
           <label class="text-sky-400">
-            <label class="text-bold">{{ item.name }}</label>
+            <label>{{ item.mark }} {{ item.model }} {{ item.year }}</label>
           </label>
-          <label class="text-[13px]">{{ item.location }}</label>
+          <label>{{ item.location }}</label>
+          <label>{{ item.price }}</label>
         </div>
       </div>
     </div>
@@ -53,57 +39,30 @@
 <script lang="ts">
 // @ is an alias to /src
 import axios from 'axios'
-import IconSearch from '@/components/icons/MyLoader.vue';
-// import MyLoader from '@/components/icons/MyLoader.vue'
 
 export default {
-  name: 'HomeView',
-  components: { IconSearch, MyLoader },
-
+  StoreCard: {
+    name: String,
+    location: String,
+  },
+  name: 'Products',
   data() {
     return {
       fetchFail: false,
       items: [],
       server: process.env.server_ip,
       searchName: '',
-      isLoading:true,
     }
   },
   async fetch() {
-    
     await axios
-      .get(this.server + '/mob/stores?name=' + this.searchName)
+      .get(this.server + '/mob/cars')
       .then((resp) => {
         this.items = resp.data.data
-        this.isLoading = false
       })
       .catch(() => {
         this.fetchFail = true
-        this.isLoading = false
       })
-      
   },
-
-  methods:{
-    setData(){
-
-      this.isLoading = true;
-      this.searchName = document.getElementById('search-name').value;
-      
-      axios
-      .get(this.server + '/mob/stores?name=' + this.searchName)
-      .then((resp) => {
-        this.items = resp.data.data
-        this.isLoading = false
-      })
-      .catch(() => {
-        this.fetchFail = true
-        this.isLoading = false
-      })
-
-    }
-
-  }
-
 }
 </script>

@@ -25,7 +25,12 @@
           <label class="text-sky-400">
             <label>{{ item.name }}</label>
           </label>
-          <label>{{ item.location }}</label>
+          <div class="flex items-center">
+            <IconLoaction
+              class="text-slate-400 w-[15px] h-[15px]"
+            ></IconLoaction>
+            <label class="text-slate-400">{{ item.location }}</label>
+          </div>
         </div>
       </div>
     </div>
@@ -35,9 +40,11 @@
 <script lang="ts">
 // @ is an alias to /src
 import axios from 'axios'
+import IconLoaction from '../components/icons/IconLocation.vue'
 
 export default {
   name: 'HomeView',
+  components: { IconLoaction },
 
   data() {
     return {

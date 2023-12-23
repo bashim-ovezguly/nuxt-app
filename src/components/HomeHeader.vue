@@ -1,13 +1,19 @@
 <template>
   <div class="shadow-md">
-    <div class="header flex p-[10px]">
+    <div class="header flex p-[10px] justify-between">
       <a href="/" class="flex">
-        <img class="h-full" src="../static/logo_white.png" />
+        <img class="logo h-full" src="../static/logo_white.png" />
         <div class="text grid">
-          <label>Söwda toplumy - MarketPlace</label>
-        </div>        
+          <label class="project-name">Söwda toplumy - MarketPlace</label>
+        </div>
       </a>
-      <Camera></Camera>
+      <div class="btns flex items-center">
+        <a href="/login" class="hover:text-sky-500">
+          <IconUser
+            class="text-white w-[40px] h-[40px] transition-all hover:text-sky-500"
+          ></IconUser>
+        </a>
+      </div>
     </div>
     <div class="flex flex-wrap justify-center sticky top-[0px]">
       <a
@@ -20,32 +26,26 @@
         href="/stores"
         >Dükanlar</a
       >
-      <a class="p-[10px] hover:text-sky-500 transition-all hover:bg-slate-100"
+      <a
+        class="p-[10px] hover:text-sky-500 transition-all hover:bg-slate-100"
+        href="/products"
         >Harytlar</a
       >
-      <a class="p-[10px] hover:text-sky-500 transition-all hover:bg-slate-100"
-        >Bildirişler</a
-      >
-      <a class="p-[10px] hover:text-sky-500 transition-all hover:bg-slate-100"
+ 
+      <a href="/cars" class="p-[10px] hover:text-sky-500 transition-all hover:bg-slate-100"
         >Awtoulaglar</a
       >
-
-      <Camera></Camera>
     </div>
   </div>
 </template>
 
-
 <script>
-  import { Camera } from 'lucide-vue';
-  export default {
-    name:"HomeHeader",
-
-    components: { Camera }
-  };
+import IconUser from '../components/icons/IconUser'
+export default {
+  name: 'HomeHeader',
+  components: { IconUser },
+}
 </script>
-
-
 
 <style>
 .header {
@@ -64,5 +64,11 @@
 .header .text {
   padding: 5px;
   align-items: center;
+}
+
+@media screen and (max-width: 610px) {
+  .header .text label {
+    font-size: 20px;
+  }
 }
 </style>

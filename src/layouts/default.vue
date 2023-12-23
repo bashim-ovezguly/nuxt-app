@@ -1,7 +1,7 @@
 <template>
   <div>
     <HomeHeader></HomeHeader>
-    <Nuxt class="min-h-[600px]" keep-alive />
+    <Nuxt class="min-h-[600px]" />
     <HomeFooter></HomeFooter>
   </div>
 </template>
