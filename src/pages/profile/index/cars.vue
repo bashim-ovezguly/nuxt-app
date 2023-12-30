@@ -1,6 +1,8 @@
 <template>
     <div>
-        <h1 class="text-bold text-[20px] m-[10px] text-slate-500">Awtoulaglar {{ items.length }}</h1>
+        <h1 class="text-bold text-[20px] m-[10px] text-slate-500">
+            Awtoulaglar {{ items.length }}
+        </h1>
         <div class="flex flex-wrap items border p-[5px] m-[5px]">
             <div
                 v-for="(item, i) in items"
@@ -36,7 +38,7 @@ export default {
     data() {
         return {
             items: [],
-            images:[],
+            images: [],
             server_ip: process.env.server_ip,
             user_id: this.$cookies.get('user_id'),
         }
@@ -44,10 +46,10 @@ export default {
 
     async fetch() {
         await axios
-            .get(this.server_ip + '/mob/cars?customer='+ this.user_id)
+            .get(this.server_ip + '/mob/cars?customer=' + this.user_id)
             .then((resp) => {
-                this.items = resp.data.data;
-                this.images = resp.data.data.images;
+                this.items = resp.data.data
+                this.images = resp.data.data.images
             })
             .catch(() => {
                 this.fetchFail = true

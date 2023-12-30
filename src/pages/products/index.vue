@@ -23,15 +23,13 @@
 
                 <button @click="setData()">
                     <IconSearch
-                        class="text-slate-400 hover:bg-slate-100 rounded  w-[30px] h-[30px]"
+                        class="text-slate-400 hover:bg-slate-100 rounded w-[30px] h-[30px]"
                     >
                     </IconSearch>
                 </button>
-
             </div>
         </div>
 
-        
         <MyLoader v-if="isLoading"></MyLoader>
 
         <div class="flex flex-wrap items justify-center">
@@ -78,7 +76,7 @@ export default {
             items: [],
             server: process.env.server_ip,
             searchName: '',
-            isLoading:true,
+            isLoading: true,
         }
     },
     async fetch() {
@@ -95,7 +93,6 @@ export default {
 
     methods: {
         setData() {
-
             axios
                 .get(this.server + '/mob/products?name=' + this.searchName)
                 .then((resp) => {

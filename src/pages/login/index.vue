@@ -1,11 +1,8 @@
 <script>
 import axios from 'axios'
 
-
 export default {
-
     data() {
-
         return {
             username: '',
             password: '',
@@ -23,16 +20,19 @@ export default {
             axios
                 .post(this.server_ip + '/mob/token/obtain', formdata)
                 .then((resp) => {
-                    
                     document.location.href = '/profile/products'
-                    this.$cookies.removeAll();
+                    this.$cookies.removeAll()
                     this.$cookies.set('phone', resp.data.data.phone)
                     this.$cookies.set('user_id', resp.data.data.id)
                     this.$cookies.set('name', resp.data.data.name)
-                    this.$cookies.set('access_token', resp.data.data.access_token)
-                    this.$cookies.set('refresh_token', resp.data.data.refresh_token)
-                    
-                    
+                    this.$cookies.set(
+                        'access_token',
+                        resp.data.data.access_token,
+                    )
+                    this.$cookies.set(
+                        'refresh_token',
+                        resp.data.data.refresh_token,
+                    )
                 })
                 .catch(() => {
                     alert('Invalid username or password')

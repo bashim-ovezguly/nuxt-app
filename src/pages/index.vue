@@ -63,7 +63,7 @@ export default {
             items: [],
             server: process.env.server_ip,
             loginModal: false,
-            isLoading:true,
+            isLoading: true,
         }
     },
     async fetch() {

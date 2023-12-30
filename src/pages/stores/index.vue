@@ -11,12 +11,9 @@
             </button>
         </div>
 
-
         <div v-if="fetchFail == false" class="home">
             <h1 class="text-3xl font-bold p-[10px]">Dükanlar</h1>
-            <div
-                class="flex"
-            >
+            <div class="flex">
                 <input
                     v-model="searchName"
                     type="search"
@@ -25,7 +22,7 @@
                 />
                 <button @click="setData()">
                     <IconSearch
-                        class="text-slate-400 hover:bg-slate-100 rounded  w-[30px] h-[30px]"
+                        class="text-slate-400 hover:bg-slate-100 rounded w-[30px] h-[30px]"
                     >
                     </IconSearch>
                 </button>

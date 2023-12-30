@@ -10,18 +10,19 @@
                 </div>
             </NuxtLink>
             <div class="btns flex items-center">
-                <div  
+                <div
                     class="hover:text-sky-500 flex items-center hover:text-sky-500"
-                    @click = "profileClick()"
+                    @click="profileClick()"
                 >
                     <IconUser
                         class="text-white w-[40px] h-[40px] transition-all hover:text-sky-500"
                     ></IconUser>
                     <div class="grid">
-                        <label class="text-white text-[13px]">{{ phone }}</label>
+                        <label class="text-white text-[13px]">{{
+                            phone
+                        }}</label>
                         <label class="text-white text-[13px]">{{ name }}</label>
                     </div>
-                    
                 </div>
             </div>
         </div>
@@ -63,24 +64,23 @@ export default {
     name: 'HomeHeader',
     components: { IconUser },
 
-    data(){
-        return{
+    data() {
+        return {
             phone: this.$cookies.get('phone'),
             name: this.$cookies.get('name'),
-            login:true,
+            login: true,
         }
     },
 
-    methods:{
-        profileClick(){
-            if(this.$cookies.get('phone') !== undefined){
-                window.location.href = '/profile/';
+    methods: {
+        profileClick() {
+            if (this.$cookies.get('phone') !== undefined) {
+                window.location.href = '/profile/'
+            } else {
+                window.location.href = '/login'
             }
-            else{
-                window.location.href = '/login';
-            }
-        }
-    }
+        },
+    },
 }
 </script>
 
