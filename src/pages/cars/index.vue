@@ -1,16 +1,5 @@
 <template>
     <div class="content">
-        <div v-if="fetchFail == true" class="grid justify-center">
-            <h1 class="text-[25px] p-[10px]">Serwer jogap bermedi</h1>
-            <Icon name="uil:github" color="black" />
-            <button
-                class="bg-gray-200 rounded shadow-md"
-                onclick="this.fetch()"
-            >
-                Täzeden synanyşmak
-            </button>
-        </div>
-
         <div v-if="fetchFail == false" class="home">
             <h1 class="text-3xl font-bold p-[10px]">Awtoulaglar</h1>
             <div>
@@ -54,11 +43,17 @@
 import axios from 'axios'
 
 export default {
-    StoreCard: {
-        name: String,
-        location: String,
-    },
     name: 'Products',
+
+    async asyncData() {
+        try {
+            const resp = await axios.get(process.env.server_ip + '/mob/cars')
+            return { items: resp.data.data }
+        } catch (err) {
+            alert('fetch error')
+        }
+    },
+
     data() {
         return {
             fetchFail: false,
@@ -66,16 +61,6 @@ export default {
             server: process.env.server_ip,
             searchName: '',
         }
-    },
-    async fetch() {
-        await axios
-            .get(this.server + '/mob/cars')
-            .then((resp) => {
-                this.items = resp.data.data
-            })
-            .catch(() => {
-                this.fetchFail = true
-            })
     },
 }
 </script>

@@ -22,6 +22,12 @@
             </NuxtLink>
             <NuxtLink
                 class="p-[5px] text-sky-400 hover:bg-sky-400 hover:text-white m-[10px] rounded"
+                to="cars"
+            >
+                Awtoulaglar
+            </NuxtLink>
+            <NuxtLink
+                class="p-[5px] text-sky-400 hover:bg-sky-400 hover:text-white m-[10px] rounded"
                 to="images"
             >
                 Suratlar
@@ -44,6 +50,28 @@
 import axios from 'axios'
 
 export default {
+
+    async asyncData({params}) {
+        const storeId = params.id
+        
+        try {
+            const resps =  await Promise.all([
+                axios.get(process.env.server_ip + '/mob/stores/' + storeId),
+                axios.get(process.env.server_ip + '/mob/products?store=' + storeId),
+            ])
+            return {
+                store : resps[0].data,
+                location : resps[0].data.location,
+                products : resps[1].data.data,
+            }
+        }
+        catch(err){
+            // alert('fetch error');
+        }
+
+        
+    },
+
     data() {
         return {
             name: '',
@@ -55,20 +83,7 @@ export default {
         }
     },
 
-    async fetch() {
-        this.id = this.$route.params.id
-        try {
-            const resps = await Promise.all([
-                axios.get(this.server + '/mob/stores/' + this.id),
-                axios.get(this.server + '/mob/products?store=' + this.id),
-            ])
-            this.store = resps[0].data
-            this.location = resps[0].data.location
-            this.products = resps[1].data.data
-        } catch (err) {
-            this.fetchFail = true
-        }
-    },
+  
 }
 </script>
 

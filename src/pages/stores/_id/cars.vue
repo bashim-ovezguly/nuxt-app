@@ -1,21 +1,22 @@
 <template>
     <div class="products">
-        <label class="tab-content-name">Harytlar: {{ productsCount }}</label>
+        <label class="tab-content-name">Awtoulaglar: {{ productsCount }}</label>
         <div class="flex flex-wrap justify-center">
             <div
                 v-for="product in products"
                 :key="product.id"
                 class="grid w-max-content h-80 m-5 shadow-md rounded-lg overflow-hidden border"
             >
-                <NuxtLink :to="'/products/' + product.id">
+                <NuxtLink :to="'/cars/' + product.id">
                     <img
                         class="object-cover w-[230px] h-[230px]"
                         :src="server + product.img"
                     />
                 </NuxtLink>
 
-                <div class="p-[10px]">
-                    <label class="bg-white">{{ product.name }}</label>
+                <div class="p-[10px] grid border">
+                    <label class="bg-white">{{ product.mark }} {{ product.model }} {{ product.year }}</label>
+                    <label class="bg-sky-700 text-white w-max p-[4px] h-max rounded-md">{{ product.price }}</label>
                 </div>
             </div>
         </div>
@@ -43,7 +44,7 @@ export default {
     async fetch() {
         this.id = this.$route.params.id
         await axios
-            .get(this.server + '/mob/products?store=' + this.id)
+            .get(this.server + '/mob/cars?store=' + this.id)
             .then((resp) => {
                 this.products = resp.data.data
                 this.productsCount = resp.data.data.length
@@ -53,7 +54,7 @@ export default {
 
     head() {
         return {
-            title: 'Harytlar',
+            title: 'Awtoulaglar',
         }
     },
 }

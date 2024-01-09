@@ -1,21 +1,9 @@
 <template>
     <div class="content">
-        <div v-if="fetchFail == true" class="grid justify-center">
-            <h1 class="text-[25px] p-[10px]">Serwer jogap bermedi</h1>
-            <Icon name="uil:github" color="black" />
-            <button
-                class="bg-gray-200 rounded shadow-md"
-                onclick="this.fetch()"
-            >
-                Täzeden synanyşmak
-            </button>
-        </div>
-
         <h1 v-if="fetchFail == false" class="text-3xl font-bold p-[10px]">
             Maslahat berilýän dükanlar
         </h1>
 
-        <MyLoader v-if="isLoading"></MyLoader>
         <div class="flex flex-wrap items justify-center">
             <div
                 v-for="(item, i) in items"
@@ -51,11 +39,19 @@
 // @ is an alias to /src
 import axios from 'axios'
 import IconLoaction from '../components/icons/IconLocation.vue'
-import MyLoader from '~/components/MyLoader.vue'
 
 export default {
     name: 'HomeView',
-    components: { IconLoaction, MyLoader },
+    components: { IconLoaction },
+
+    async asyncData() {
+        try {
+            const resp = await axios.get(process.env.server_ip + '/mob/stores?premium=1')
+            return { items: resp.data.data, isLoading: false }
+        } catch (err) {
+            alert('fetch error')
+        }
+    },
 
     data() {
         return {
@@ -65,18 +61,6 @@ export default {
             loginModal: false,
             isLoading: true,
         }
-    },
-    async fetch() {
-        await axios
-            .get(this.server + '/mob/stores?premium=1')
-            .then((resp) => {
-                this.items = resp.data.data
-                this.isLoading = false
-            })
-            .catch(() => {
-                this.fetchFail = true
-                this.isLoading = false
-            })
     },
 }
 </script>

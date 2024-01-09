@@ -1,5 +1,5 @@
 <template>
-    <div class="shadow-md">
+    <div class="shadow-md sticky top-[0px]">
         <div class="header flex p-[10px] justify-between">
             <NuxtLink to="/" class="flex">
                 <img class="logo h-full" src="../static/logo_white.png" />
@@ -26,31 +26,31 @@
                 </div>
             </div>
         </div>
-        <div class="flex flex-wrap justify-center sticky top-[0px]">
+        <div class="flex flex-wrap justify-center bg-white">
             <NuxtLink
                 :to="'/'"
-                class="p-[10px] hover:text-sky-500 transition-all hover:bg-slate-100"
+                class="p-[5px] m-[5px] hover:text-sky-500 transition-all hover:bg-slate-100 rounded-md"
             >
                 Baş sahypa
             </NuxtLink>
 
             <NuxtLink
                 :to="'/stores'"
-                class="p-[10px] hover:text-sky-500 transition-all hover:bg-slate-100"
+                class="p-[5px] m-[5px] hover:text-sky-500 transition-all hover:bg-slate-100 rounded-md"
             >
                 Dükanlar
             </NuxtLink>
 
             <NuxtLink
                 :to="'/products'"
-                class="p-[10px] hover:text-sky-500 transition-all hover:bg-slate-100"
+                class="p-[5px] m-[5px] hover:text-sky-500 transition-all hover:bg-slate-100 rounded-md"
             >
                 Harytlar
             </NuxtLink>
 
             <NuxtLink
                 :to="'/cars'"
-                class="p-[10px] hover:text-sky-500 transition-all hover:bg-slate-100"
+                class="p-[5px] m-[5px] hover:text-sky-500 transition-all hover:bg-slate-100 rounded-md"
             >
                 Awtoulaglar
             </NuxtLink>

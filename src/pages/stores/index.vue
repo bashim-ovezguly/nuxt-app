@@ -1,20 +1,10 @@
 <template>
     <div class="content">
-        <div v-if="fetchFail == true" class="grid justify-center">
-            <h1 class="text-[25px] p-[10px]">Serwer jogap bermedi</h1>
-            <Icon name="uil:github" color="black" />
-            <button
-                class="bg-gray-200 rounded shadow-md"
-                onclick="this.fetch()"
-            >
-                Täzeden synanyşmak
-            </button>
-        </div>
-
         <div v-if="fetchFail == false" class="home">
             <h1 class="text-3xl font-bold p-[10px]">Dükanlar</h1>
             <div class="flex">
                 <input
+                    ref="search"
                     v-model="searchName"
                     type="search"
                     class="border rounded mx-[5px] px-[10px] p-[0px] m-[0px] text-[13px]"
@@ -30,8 +20,6 @@
         </div>
 
         <h3 v-if="items.length == 0 && !isLoading">Dükan tapylmady</h3>
-
-        <MyLoader v-if="isLoading"></MyLoader>
 
         <div class="flex flex-wrap items justify-center">
             <div
@@ -63,12 +51,22 @@
 <script lang="ts">
 // @ is an alias to /src
 import axios from 'axios'
-import MyLoader from '@/components/MyLoader.vue'
 import IconSearch from '@/components/icons/IconSearch.vue'
 
 export default {
     name: 'StoresView',
-    components: { MyLoader, IconSearch },
+    components: { IconSearch },
+
+    async asyncData() {
+        try {
+            const resp = await axios.get(
+                process.env.server_ip + '/mob/stores?name=',
+            )
+            return { items: resp.data.data }
+        } catch (err) {
+            alert('fetch error')
+        }
+    },
 
     data() {
         return {
@@ -78,18 +76,6 @@ export default {
             searchName: '',
             isLoading: true,
         }
-    },
-    async fetch() {
-        await axios
-            .get(this.server + '/mob/stores?name=' + this.searchName)
-            .then((resp) => {
-                this.items = resp.data.data
-                this.isLoading = false
-            })
-            .catch(() => {
-                this.fetchFail = true
-                this.isLoading = true
-            })
     },
 
     methods: {

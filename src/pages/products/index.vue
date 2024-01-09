@@ -1,16 +1,5 @@
 <template>
     <div class="content">
-        <div v-if="fetchFail == true" class="grid justify-center">
-            <h1 class="text-[25px] p-[10px]">Serwer jogap bermedi</h1>
-            <Icon name="uil:github" color="black" />
-            <button
-                class="bg-gray-200 rounded shadow-md"
-                onclick="this.fetch()"
-            >
-                Täzeden synanyşmak
-            </button>
-        </div>
-
         <div v-if="fetchFail == false" class="home">
             <h1 class="text-3xl font-bold p-[10px]">Harytlar</h1>
             <div class="flex items-center">
@@ -29,8 +18,6 @@
                 </button>
             </div>
         </div>
-
-        <MyLoader v-if="isLoading"></MyLoader>
 
         <div class="flex flex-wrap items justify-center">
             <div
@@ -61,14 +48,24 @@
 // @ is an alias to /src
 import axios from 'axios'
 import IconSearch from '@/components/icons/IconSearch.vue'
-import MyLoader from '~/components/MyLoader.vue'
 
 export default {
     StoreCard: {
         name: String,
         location: String,
     },
-    components: { IconSearch, MyLoader },
+    components: { IconSearch },
+
+    async asyncData() {
+        try {
+            const resp = await axios.get(
+                process.env.server_ip + '/mob/products',
+            )
+            return { items: resp.data.data }
+        } catch (err) {
+            alert('fetch error')
+        }
+    },
 
     data() {
         return {
@@ -78,17 +75,6 @@ export default {
             searchName: '',
             isLoading: true,
         }
-    },
-    async fetch() {
-        await axios
-            .get(this.server + '/mob/products')
-            .then((resp) => {
-                this.items = resp.data.data
-                this.isLoading = false
-            })
-            .catch(() => {
-                this.fetchFail = true
-            })
     },
 
     methods: {
