@@ -20,6 +20,26 @@
 import axios from 'axios'
 
 export default {
+    async asyncData({params}) {
+        const id = params.id
+        try {
+            const resps = await Promise.all([
+                axios.get(process.env.server_ip + '/mob/products/' + id),
+            ])
+            return {
+                name : resps[0].data.name,
+                price : resps[0].data.price,
+                description : resps[0].data.description,
+                location : resps[0].data.location,
+                img : resps[0].data.img,
+                category : resps[0].data.category,
+            }
+            
+        } catch (err) {
+            alert('fetch error')
+        }
+    },
+
     data() {
         return {
             name: '',
@@ -32,22 +52,7 @@ export default {
         }
     },
 
-    async fetch() {
-        this.id = this.$route.params.id
-        try {
-            const resps = await Promise.all([
-                axios.get(this.server + '/mob/products/' + this.id),
-            ])
-            this.name = resps[0].data.name
-            this.price = resps[0].data.price
-            this.description = resps[0].data.description
-            this.location = resps[0].data.location
-            this.img = resps[0].data.img
-            this.category = resps[0].data.category
-        } catch (err) {
-            this.fetchFail = true
-        }
-    },
+
 }
 </script>
 

@@ -66,7 +66,7 @@ export default {
             }
         }
         catch(err){
-            // alert('fetch error');
+            alert('fetch error');
         }
 
         

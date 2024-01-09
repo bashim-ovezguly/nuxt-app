@@ -80,10 +80,8 @@ export default {
 
     methods: {
         setData() {
-            this.isLoading = true
-
             axios
-                .get(this.server + '/mob/stores?name=' + this.searchName)
+                .get(this.server + '/mob/stores?name=' + this.$refs.search.value)
                 .then((resp) => {
                     this.items = resp.data.data
                     this.isLoading = false

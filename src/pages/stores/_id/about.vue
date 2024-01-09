@@ -8,6 +8,21 @@
 import axios from 'axios'
 export default {
     name: 'HomeView',
+
+    async asyncData({params}) {
+        id = params.id
+        try{
+            const resp = await axios.get(process.env.server_ip + '/mob/stores/' + id)
+            return {
+                description : resp.data.body_tm,
+                storeName : resp.data.name
+            }
+        }
+        catch(err){
+
+        }
+    },
+
     data() {
         return {
             description: '',
@@ -18,13 +33,7 @@ export default {
             storeName: '',
         }
     },
-    async fetch() {
-        this.id = this.$route.params.id
-        await axios.get(this.server + '/mob/stores/' + this.id).then((resp) => {
-            this.description = resp.data.body_tm
-            this.storeName = resp.data.name
-        })
-    },
+   
 
     head() {
         return {

@@ -56,33 +56,25 @@
 import axios from 'axios'
 
 export default {
-    data() {
-        return {
-            server_ip: process.env.server_ip,
-            userPhoto: '',
-            name: '',
-            username: '',
-            isLoading: '',
-            user_id: this.$cookies.get('user_id'),
-            email: '',
-            lastlogin: '',
-        }
-    },
 
-    created() {
-        axios
-            .get(this.server_ip + '/mob/customer/' + this.user_id)
-            .then((resp) => {
-                this.userPhoto = resp.data.data.img
-                this.lastlogin = resp.data.data.last_login
-                this.email = resp.data.data.email
-                this.username = resp.data.data.phone
-                this.name = resp.data.data.name
-            })
-            .catch(() => {
-                this.fetchFail = true
-                alert('fetch error')
-            })
+    
+    async asyncData({$cookies}) {
+        const userId = $cookies.get('user_id') 
+        try{
+            const resp = await axios.get(process.env.server_ip + '/mob/customer/' + userId)
+
+            return {
+                userPhoto : resp.data.data.img,
+                lastlogin : resp.data.data.last_login,
+                email : resp.data.data.email,
+                username : resp.data.data.phone,
+                name : resp.data.data.name,
+                server_ip : process.env.server_ip,
+            }
+            
+        }catch(err) {
+            alert('fetch error')
+        }
     },
 
     methods: {

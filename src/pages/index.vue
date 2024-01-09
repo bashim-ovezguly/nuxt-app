@@ -47,20 +47,15 @@ export default {
     async asyncData() {
         try {
             const resp = await axios.get(process.env.server_ip + '/mob/stores?premium=1')
-            return { items: resp.data.data, isLoading: false }
+            return { 
+                items: resp.data.data ,
+                server: process.env.server_ip,
+            }
         } catch (err) {
             alert('fetch error')
         }
     },
 
-    data() {
-        return {
-            fetchFail: false,
-            items: [],
-            server: process.env.server_ip,
-            loginModal: false,
-            isLoading: true,
-        }
-    },
+
 }
 </script>

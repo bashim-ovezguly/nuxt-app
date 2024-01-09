@@ -38,6 +38,19 @@
 import axios from 'axios'
 
 export default {
+    async asyncData({$cookies}) {
+        const userId = $cookies.get('user_id') 
+        try{
+            const resp = await axios.get(process.env.server_ip + '/mob/products?customer=' + userId)
+            return {
+                items : resp.data.data,
+            }
+    }
+        catch(err) {
+            alert('fetch error')
+        }
+    },
+
     data() {
         return {
             items: [],
@@ -46,15 +59,6 @@ export default {
         }
     },
 
-    async fetch() {
-        await axios
-            .get(this.server_ip + '/mob/products?customer=' + this.user_id)
-            .then((resp) => {
-                this.items = resp.data.data
-            })
-            .catch(() => {
-                this.fetchFail = true
-            })
-    },
+   
 }
 </script>
