@@ -38,11 +38,10 @@
 import axios from 'axios'
 import IconLoaction from '../components/icons/IconLocation.vue'
 import { serverIP } from '../utils/constants'
-import NotificationSuccess from '~/components/NotificationSuccess.vue'
 
 export default {
     name: 'HomeView',
-    components: { IconLoaction, NotificationSuccess },
+    components: { IconLoaction },
 
     async asyncData() {
         try {
