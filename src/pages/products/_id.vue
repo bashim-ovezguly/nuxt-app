@@ -18,23 +18,23 @@
 
 <script>
 import axios from 'axios'
+import { serverIP } from '@/utils/constants'
 
 export default {
-    async asyncData({params}) {
+    async asyncData({ params }) {
         const id = params.id
         try {
             const resps = await Promise.all([
                 axios.get(process.env.server_ip + '/mob/products/' + id),
             ])
             return {
-                name : resps[0].data.name,
-                price : resps[0].data.price,
-                description : resps[0].data.description,
-                location : resps[0].data.location,
-                img : resps[0].data.img,
-                category : resps[0].data.category,
+                name: resps[0].data.name,
+                price: resps[0].data.price,
+                description: resps[0].data.description,
+                location: resps[0].data.location,
+                img: resps[0].data.img,
+                category: resps[0].data.category,
             }
-            
         } catch (err) {
             alert('fetch error')
         }
@@ -47,12 +47,10 @@ export default {
             location: '',
             id: '',
             store: '',
-            server: process.env.server_ip,
+            server: serverIP,
             fetchFail: true,
         }
     },
-
-
 }
 </script>
 

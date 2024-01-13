@@ -9,18 +9,17 @@ import axios from 'axios'
 export default {
     name: 'HomeView',
 
-    async asyncData({params}) {
-        id = params.id
-        try{
-            const resp = await axios.get(process.env.server_ip + '/mob/stores/' + id)
+    async asyncData({ params }) {
+        const id = params.id
+        try {
+            const resp = await axios.get(
+                process.env.server_ip + '/mob/stores/' + id,
+            )
             return {
-                description : resp.data.body_tm,
-                storeName : resp.data.name
+                description: resp.data.body_tm,
+                storeName: resp.data.name,
             }
-        }
-        catch(err){
-
-        }
+        } catch (err) {}
     },
 
     data() {
@@ -33,7 +32,6 @@ export default {
             storeName: '',
         }
     },
-   
 
     head() {
         return {

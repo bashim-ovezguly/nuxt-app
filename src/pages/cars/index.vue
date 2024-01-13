@@ -31,7 +31,10 @@
                         >
                     </label>
                     <label>{{ item.location }}</label>
-                    <label class="bg-sky-700 w-max h-max text-white rounded-md p-[2px]">{{ item.price }}</label>
+                    <label
+                        class="bg-sky-700 w-max h-max text-white rounded-md p-[2px]"
+                        >{{ item.price }}</label
+                    >
                 </div>
             </div>
         </div>

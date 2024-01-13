@@ -36,17 +36,19 @@
 
 <script>
 import axios from 'axios'
+import { serverIP } from '@/utils/constants'
 
 export default {
-    async asyncData({$cookies}) {
-        const userId = $cookies.get('user_id') 
-        try{
-            const resp = await axios.get(process.env.server_ip + '/mob/products?customer=' + userId)
+    async asyncData({ $cookies }) {
+        const userId = $cookies.get('user_id')
+        try {
+            const resp = await axios.get(
+                process.env.server_ip + '/mob/products?customer=' + userId,
+            )
             return {
-                items : resp.data.data,
+                items: resp.data.data,
             }
-    }
-        catch(err) {
+        } catch (err) {
             alert('fetch error')
         }
     },
@@ -54,11 +56,9 @@ export default {
     data() {
         return {
             items: [],
-            server_ip: process.env.server_ip,
+            server_ip: serverIP,
             user_id: this.$cookies.get('user_id'),
         }
     },
-
-   
 }
 </script>

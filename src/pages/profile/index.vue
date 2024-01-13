@@ -1,5 +1,10 @@
 <template>
     <div>
+        <NotificationSuccess
+            v-if="notifSuccessLogin"
+            :message="'Siz üstünlikli ulgama girdiňiz!'"
+        ></NotificationSuccess>
+
         <div class="grid h-max">
             <div class="flex h-max m-[30px] p-[10px] w-max h-max min-w-[600px]">
                 <img
@@ -54,28 +59,43 @@
 
 <script>
 import axios from 'axios'
+import { serverIP } from '@/utils/constants'
+import NotificationSuccess from '~/components/NotificationSuccess.vue'
 
 export default {
+    components: { NotificationSuccess },
 
-    
-    async asyncData({$cookies}) {
-        const userId = $cookies.get('user_id') 
-        try{
-            const resp = await axios.get(process.env.server_ip + '/mob/customer/' + userId)
-
+    async asyncData({ $cookies }) {
+        const userId = $cookies.get('user_id')
+        try {
+            const resp = await axios.get(
+                process.env.server_ip + '/mob/customer/' + userId,
+            )
             return {
-                userPhoto : resp.data.data.img,
-                lastlogin : resp.data.data.last_login,
-                email : resp.data.data.email,
-                username : resp.data.data.phone,
-                name : resp.data.data.name,
-                server_ip : process.env.server_ip,
+                userPhoto: resp.data.data.img,
+                lastlogin: resp.data.data.last_login,
+                email: resp.data.data.email,
+                username: resp.data.data.phone,
+                name: resp.data.data.name,
+                server_ip: serverIP,
             }
-            
-        }catch(err) {
+        } catch (err) {
             alert('fetch error')
         }
     },
+
+    data() {
+        return {
+            notifSuccessLogin: this.$cookies.get('notifSuccessLogin'),
+        }
+    },
+
+    mounted() {
+        this.$cookies.set('notifSuccessLogin', false)
+    },
+    // created(){
+    //     this.$cookies.set('notifSuccessLogin', false);
+    // },
 
     methods: {
         logout() {

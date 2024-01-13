@@ -48,6 +48,7 @@
 // @ is an alias to /src
 import axios from 'axios'
 import IconSearch from '@/components/icons/IconSearch.vue'
+import { serverIP } from '@/utils/constants'
 
 export default {
     StoreCard: {
@@ -71,7 +72,7 @@ export default {
         return {
             fetchFail: false,
             items: [],
-            server: process.env.server_ip,
+            server: serverIP,
             searchName: '',
             isLoading: true,
         }

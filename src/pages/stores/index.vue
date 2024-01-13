@@ -1,6 +1,6 @@
 <template>
     <div class="content">
-        <div v-if="fetchFail == false" class="home">
+        <div class="home">
             <h1 class="text-3xl font-bold p-[10px]">Dükanlar</h1>
             <div class="flex">
                 <input
@@ -52,6 +52,7 @@
 // @ is an alias to /src
 import axios from 'axios'
 import IconSearch from '@/components/icons/IconSearch.vue'
+import { serverIP } from '@/utils/constants'
 
 export default {
     name: 'StoresView',
@@ -70,9 +71,8 @@ export default {
 
     data() {
         return {
-            fetchFail: false,
             items: [],
-            server: process.env.server_ip,
+            server: serverIP,
             searchName: '',
             isLoading: true,
         }
@@ -81,13 +81,14 @@ export default {
     methods: {
         setData() {
             axios
-                .get(this.server + '/mob/stores?name=' + this.$refs.search.value)
+                .get(
+                    this.server + '/mob/stores?name=' + this.$refs.search.value,
+                )
                 .then((resp) => {
                     this.items = resp.data.data
                     this.isLoading = false
                 })
                 .catch(() => {
-                    this.fetchFail = true
                     this.isLoading = false
                 })
         },

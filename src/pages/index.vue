@@ -1,8 +1,6 @@
 <template>
     <div class="content">
-        <h1 v-if="fetchFail == false" class="text-3xl font-bold p-[10px]">
-            Maslahat berilýän dükanlar
-        </h1>
+        <h1 class="text-3xl font-bold p-[10px]">Maslahat berilýän dükanlar</h1>
 
         <div class="flex flex-wrap items justify-center">
             <div
@@ -39,23 +37,23 @@
 // @ is an alias to /src
 import axios from 'axios'
 import IconLoaction from '../components/icons/IconLocation.vue'
+import { serverIP } from '../utils/constants'
+import NotificationSuccess from '~/components/NotificationSuccess.vue'
 
 export default {
     name: 'HomeView',
-    components: { IconLoaction },
+    components: { IconLoaction, NotificationSuccess },
 
     async asyncData() {
         try {
-            const resp = await axios.get(process.env.server_ip + '/mob/stores?premium=1')
-            return { 
-                items: resp.data.data ,
-                server: process.env.server_ip,
+            const resp = await axios.get(serverIP + '/mob/stores?premium=1')
+            return {
+                items: resp.data.data,
+                server: serverIP,
             }
         } catch (err) {
             alert('fetch error')
         }
     },
-
-
 }
 </script>

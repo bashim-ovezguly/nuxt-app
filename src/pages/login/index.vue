@@ -1,12 +1,13 @@
 <script>
 import axios from 'axios'
+import { serverIP } from '@/utils/constants'
 
 export default {
     data() {
         return {
             username: '',
             password: '',
-            server_ip: process.env.server_ip,
+            server_ip: serverIP,
         }
     },
 
@@ -25,6 +26,7 @@ export default {
                     this.$cookies.set('phone', resp.data.data.phone)
                     this.$cookies.set('user_id', resp.data.data.id)
                     this.$cookies.set('name', resp.data.data.name)
+                    this.$cookies.set('notifSuccessLogin', true)
                     this.$cookies.set(
                         'access_token',
                         resp.data.data.access_token,

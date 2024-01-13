@@ -50,26 +50,24 @@
 import axios from 'axios'
 
 export default {
-
-    async asyncData({params}) {
+    async asyncData({ params }) {
         const storeId = params.id
-        
+
         try {
-            const resps =  await Promise.all([
+            const resps = await Promise.all([
                 axios.get(process.env.server_ip + '/mob/stores/' + storeId),
-                axios.get(process.env.server_ip + '/mob/products?store=' + storeId),
+                axios.get(
+                    process.env.server_ip + '/mob/products?store=' + storeId,
+                ),
             ])
             return {
-                store : resps[0].data,
-                location : resps[0].data.location,
-                products : resps[1].data.data,
+                store: resps[0].data,
+                location: resps[0].data.location,
+                products: resps[1].data.data,
             }
+        } catch (err) {
+            alert('fetch error')
         }
-        catch(err){
-            alert('fetch error');
-        }
-
-        
     },
 
     data() {
@@ -82,8 +80,6 @@ export default {
             fetchFail: true,
         }
     },
-
-  
 }
 </script>
 

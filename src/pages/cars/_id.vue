@@ -22,8 +22,7 @@
 import axios from 'axios'
 
 export default {
-
-    async asyncData({params}) {
+    async asyncData({ params }) {
         const id = params.id
         try {
             const resps = await Promise.all([
@@ -31,15 +30,14 @@ export default {
             ])
 
             return {
-                price : resps[0].data.price,
-                description : resps[0].data.description,
-                location : resps[0].data.location,
-                mark : resps[0].data.mark,
-                model : resps[0].data.model,
-                year : resps[0].data.year,
-                img : resps[0].data.img.img_m,
+                price: resps[0].data.price,
+                description: resps[0].data.description,
+                location: resps[0].data.location,
+                mark: resps[0].data.mark,
+                model: resps[0].data.model,
+                year: resps[0].data.year,
+                img: resps[0].data.img.img_m,
             }
-            
         } catch (err) {
             alert('fetch error')
         }
@@ -56,8 +54,6 @@ export default {
             fetchFail: true,
         }
     },
-
- 
 }
 </script>
 

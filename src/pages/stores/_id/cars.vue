@@ -15,8 +15,14 @@
                 </NuxtLink>
 
                 <div class="p-[10px] grid border">
-                    <label class="bg-white">{{ product.mark }} {{ product.model }} {{ product.year }}</label>
-                    <label class="bg-sky-700 text-white w-max p-[4px] h-max rounded-md">{{ product.price }}</label>
+                    <label class="bg-white"
+                        >{{ product.mark }} {{ product.model }}
+                        {{ product.year }}</label
+                    >
+                    <label
+                        class="bg-sky-700 text-white w-max p-[4px] h-max rounded-md"
+                        >{{ product.price }}</label
+                    >
                 </div>
             </div>
         </div>
